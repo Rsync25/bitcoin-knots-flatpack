@@ -3,7 +3,6 @@
   "runtime": "org.freedesktop.Platform",
   "runtime-version": "22.08",
   "sdk": "org.freedesktop.Sdk",
-  "sdk-extensions": ["org.freedesktop.Sdk.Extension.llvm16"],
   "command": "bitcoin-knots-daemon",
   "finish-args": [
     "--share=network",
