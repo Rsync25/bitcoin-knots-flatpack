@@ -3,6 +3,7 @@
   "runtime": "org.freedesktop.Platform",
   "runtime-version": "22.08",
   "sdk": "org.freedesktop.Sdk",
+  "sdk-extensions": ["org.freedesktop.Sdk.Extension.llvm16"],
   "command": "bitcoin-knots-daemon",
   "finish-args": [
     "--share=network",
@@ -14,39 +15,6 @@
     "--allow=devel"
   ],
   "modules": [
-    {
-      "name": "boost",
-      "buildsystem": "cmake-ninja",
-      "config-opts": [
-        "-DBUILD_SHARED_LIBS=ON",
-        "-DCMAKE_BUILD_TYPE=Release",
-        "-DBOOST_CONTEXT_BUILD_EXAMPLES=OFF",
-        "-DBOOST_CONTEXT_BUILD_TESTS=OFF"
-      ],
-      "sources": [
-        {
-          "type": "archive",
-          "url": "https://boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.tar.bz2",
-          "sha256": "9c2f4b99bc7ddb95a8babff8ba78a4108aa0951243ea919166a7e2e279825502"
-        }
-      ]
-    },
-    {
-      "name": "libevent",
-      "buildsystem": "autotools",
-      "config-opts": [
-        "--disable-libevent-regress",
-        "--disable-samples",
-        "--disable-openssl"
-      ],
-      "sources": [
-        {
-          "type": "archive",
-          "url": "https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz",
-          "sha256": "92e6de1be9ec176428fd2367677e61ceffc2ee1dc119e037e4b4d2e7c2c2ad4c"
-        }
-      ]
-    },
     {
       "name": "berkeley-db",
       "buildsystem": "autotools",
@@ -81,9 +49,9 @@
         "--disable-bench",
         "--disable-tests",
         "--disable-man",
-        "--with-boost=/app",
-        "--with-boost-libdir=/app/lib",
-        "--with-libevent=/app"
+        "--with-boost=/usr",
+        "--with-boost-libdir=/usr/lib64",
+        "--with-libevent=/usr"
       ],
       "sources": [
         {
@@ -91,11 +59,6 @@
           "url": "https://github.com/bitcoinknots/bitcoin.git",
           "branch": "29.x-knots",
           "commit": "v29.1.knots20250903"
-        },
-        {
-          "type": "script",
-          "dest-filename": "fix-permissions.sh",
-          "commands": ["chmod -R a+rX ."]
         }
       ]
     },
