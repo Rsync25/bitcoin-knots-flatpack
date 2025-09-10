@@ -26,8 +26,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.tar.bz2",
-          "sha256": "9c2f4b99bc7ddb95a8babff8ba78a4108aa0951243ea919166a7e2e279825502"
+          "url": "https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/boost_1_81_0.tar.bz2",
+          "sha256": "71feeed900fbccca04a3b4f2f84a7c217186f28a940ed8b7ed4725986baf99fa"
         }
       ]
     },
@@ -48,8 +48,33 @@
       ]
     },
     {
+      "name": "berkeley-db",
+      "buildsystem": "simple",
+      "build-commands": [
+        "cd build_unix",
+        "../dist/configure --prefix=/app --disable-shared --enable-cxx --disable-replication --with-pic",
+        "make -j$(nproc)",
+        "make install"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz",
+          "sha256": "12edc0df75bf9abd7f82f821795bcee50f42cb2e5f76a6a281b85732798364ef"
+        }
+      ]
+    },
+    {
       "name": "bitcoin-knots",
       "buildsystem": "autotools",
+      "build-options": {
+        "env": {
+          "CPPFLAGS": "-I/app/include -I/app/include/db4.8",
+          "LDFLAGS": "-L/app/lib -L/app/lib/db4.8",
+          "BDB_CFLAGS": "-I/app/include/db4.8",
+          "BDB_LIBS": "-L/app/lib/db4.8 -ldb_cxx-4.8"
+        }
+      },
       "config-opts": [
         "--disable-gui",
         "--disable-wallet",
@@ -63,8 +88,8 @@
       "sources": [
         {
           "type": "git",
-  "url": "https://github.com/bitcoinknots/bitcoin.git",
-  "tag": "v29.1.knots20250903"
+          "url": "https://github.com/bitcoinknots/bitcoin.git",
+          "tag": "v29.1.knots20250903"
         },
         {
           "type": "script",
