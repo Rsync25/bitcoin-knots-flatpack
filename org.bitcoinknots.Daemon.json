@@ -63,9 +63,8 @@
       "sources": [
         {
           "type": "git",
-          "url": "https://github.com/bitcoinknots/bitcoin.git",
-          "branch": "29.x-knots",
-          "commit": "v29.1.knots20250903"
+  "url": "https://github.com/bitcoinknots/bitcoin.git",
+  "tag": "v29.1.knots20250903"
         },
         {
           "type": "script",
