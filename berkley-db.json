@@ -1,0 +1,17 @@
+{
+  "name": "berkeley-db",
+  "buildsystem": "simple",
+  "build-commands": [
+    "cd build_unix",
+    "../dist/configure --prefix=/app --disable-shared --enable-cxx --disable-replication --with-pic",
+    "make -j$(nproc)",
+    "make install"
+  ],
+  "sources": [
+    {
+      "type": "archive",
+      "url": "https://download.oracle.com/berkeley-db/db-4.8.30.tar.gz",
+      "sha256": "e0491a07cdb21c9ce8dbfde8d9b2a62c6e53f4c6c6e5f4c6c6e5f4c6c6e5f4c6"
+    }
+  ]
+}
