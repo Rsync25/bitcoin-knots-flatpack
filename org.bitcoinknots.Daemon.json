@@ -15,49 +15,62 @@
   ],
   "modules": [
     {
-      "name": "berkeley-db",
-      "buildsystem": "autotools",
+      "name": "boost",
+      "buildsystem": "cmake-ninja",
       "config-opts": [
-        "--disable-shared",
-        "--enable-cxx",
-        "--disable-replication",
-        "--with-pic"
+        "-DBUILD_SHARED_LIBS=ON",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DBOOST_CONTEXT_BUILD_EXAMPLES=OFF",
+        "-DBOOST_CONTEXT_BUILD_TESTS=OFF"
       ],
       "sources": [
         {
           "type": "archive",
-          "url": "https://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz",
-          "sha256": "12edc0df75bf9abd7f82f821795bcee50f42cb2e5f76a6a281b85732798364ef"
+          "url": "https://boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.tar.bz2",
+          "sha256": "9c2f4b99bc7ddb95a8babff8ba78a4108aa0951243ea919166a7e2e279825502"
+        }
+      ]
+    },
+    {
+      "name": "libevent",
+      "buildsystem": "autotools",
+      "config-opts": [
+        "--disable-libevent-regress",
+        "--disable-samples",
+        "--disable-openssl"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz",
+          "sha256": "92e6de1be9ec176428fd2367677e61ceffc2ee1cb119035037a27d346b0403bb"
         }
       ]
     },
     {
       "name": "bitcoin-knots",
       "buildsystem": "autotools",
-      "build-options": {
-        "env": {
-          "CPPFLAGS": "-I/app/include -I/app/include/db4.8",
-          "LDFLAGS": "-L/app/lib -L/app/lib/db4.8",
-          "BDB_CFLAGS": "-I/app/include/db4.8",
-          "BDB_LIBS": "-L/app/lib/db4.8 -ldb_cxx-4.8"
-        }
-      },
       "config-opts": [
         "--disable-gui",
         "--disable-wallet",
         "--disable-bench",
         "--disable-tests",
         "--disable-man",
-        "--with-boost=/usr",
-        "--with-boost-libdir=/usr/lib64",
-        "--with-libevent=/usr"
+        "--with-boost=/app",
+        "--with-boost-libdir=/app/lib",
+        "--with-libevent=/app"
       ],
       "sources": [
         {
           "type": "git",
           "url": "https://github.com/bitcoinknots/bitcoin.git",
-          "branch": "v29.1.knots20250903",
-          "commit": "271fd206893a164b2d1c2d1c44c3696d23dd10e9"
+          "branch": "29.x-knots",
+          "commit": "v29.1.knots20250903"
+        },
+        {
+          "type": "script",
+          "dest-filename": "fix-permissions.sh",
+          "commands": ["chmod -R a+rX ."]
         }
       ]
     },
