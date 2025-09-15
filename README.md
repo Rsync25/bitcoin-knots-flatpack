@@ -1,4 +1,8 @@
-# Bitcoin Knots Daemon Flatpak
+# Bitcoin Knots Daemon Flatpak 🪢
+
+**This software is in WIP**
+
+**If you find issues, bugs and others, open PR or Issues**
 
 Flatpak package for Bitcoin Knots daemon (bitcoind).
 
