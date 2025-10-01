@@ -1,6 +1,6 @@
 # Bitcoin Knots Daemon Flatpak 🪢
 
-**This software is in WIP**
+**This software is in  Beta**
 
 **If you find issues, bugs and others, open PR or Issues**
 
