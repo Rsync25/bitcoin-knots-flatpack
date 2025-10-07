@@ -274,3 +274,6 @@ jobs:
       with:
         files: bitcoin-knots-daemon.flatpak
 ```
+### Roadmap
+
+- [ ] GUI support
